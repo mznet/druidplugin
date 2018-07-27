@@ -61,8 +61,8 @@ export class DruidQueryCtrl extends QueryCtrl {
     defaultFilterType = "selector";
     defaultAggregatorType = "count";
     defaultPostAggregator = {type: 'arithmetic', 'fn': '+'};
-    customGranularities = ['minute', 'fifteen_minute', 'thirty_minute', 'hour', 'day', 'all'];
-    defaultCustomGranularity = 'minute';
+    customGranularities = ['ten_minute', 'thirty_minute', 'hour', 'day', 'all'];
+    defaultCustomGranularity = 'ten_minute';
     defaultSelectDimension = "";
     defaultSelectMetric = "";
     defaultLimit = 5;
