@@ -463,7 +463,7 @@ export class DruidQueryCtrl extends QueryCtrl {
         return "Must provide values for in filter"
       }
 
-      delete target.value
+      return null;
     }
 
     validateCountAggregator(target) {
