@@ -34,9 +34,18 @@ function (angular, _, dateMath, moment) {
     this.queryTimeout = instanceSettings.jsonData.queryTimeout;
 
     function replaceTemplateValues(obj, attrList) {
-      var substitutedVals = attrList.map(function (attr) {
-        return templateSrv.replace(obj[attr]);
-      });
+      if (obj.type === 'in') {
+        var substitutedVals = _.chain(attrList)
+          .map(attr => { return templateSrv.replace(obj[attr]).replace(/[{}]/g, "") })
+          .map(val => { return val.split(',') })
+          .value().flatten();
+        substitutedVals = [substitutedVals];
+      } else {
+        var substitutedVals = attrList.map(function (attr) {
+          return templateSrv.replace(obj[attr]);
+        });
+      }
+
       return _.assign(_.clone(obj, true), _.zipObject(attrList, substitutedVals));
     }
 
@@ -52,6 +61,7 @@ function (angular, _, dateMath, moment) {
       "regex": _.partialRight(replaceTemplateValues, ['pattern']),
       "javascript": _.partialRight(replaceTemplateValues, ['function']),
       "search": _.partialRight(replaceTemplateValues, []),
+      "in": _.partialRight(replaceTemplateValues, ['values'])
     };
 
     this.testDatasource = function() {

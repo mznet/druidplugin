@@ -31,6 +31,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
         "selector": any;
         "regex": any;
         "javascript": any;
+        "in": any;
     };
     aggregatorValidators: {
         "count": (target: any) => string;
@@ -103,6 +104,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
     validateSelectorFilter(target: any): string;
     validateJavascriptFilter(target: any): string;
     validateRegexFilter(target: any): string;
+    validateInFilter(target: any): string;
     validateCountAggregator(target: any): string;
     validateSimpleAggregator(type: any, target: any): string;
     validateApproxHistogramFoldAggregator(target: any): string;
