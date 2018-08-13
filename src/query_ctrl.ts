@@ -15,6 +15,7 @@ export class DruidQueryCtrl extends QueryCtrl {
   listDataSources: any;
   getDimensionsAndMetrics: any;
   getMetrics: any;
+  getMetricsPlusDimensions: any;
   getDimensions: any;
   getFilterValues: any;
   queryTypes: any;
@@ -40,6 +41,7 @@ export class DruidQueryCtrl extends QueryCtrl {
     };
     aggregatorValidators = {
       "count": this.validateCountAggregator,
+      "cardinality": _.partial(this.validateCardinalityAggregator.bind(this), 'cardinality'),
       "longSum": _.partial(this.validateSimpleAggregator.bind(this), 'longSum'),
       "doubleSum": _.partial(this.validateSimpleAggregator.bind(this), 'doubleSum'),
       "longMin": _.partial(this.validateSimpleAggregator.bind(this), 'longMin'),
@@ -127,6 +129,13 @@ export class DruidQueryCtrl extends QueryCtrl {
     return this.datasource.getDimensionsAndMetrics(this.target.druidDS)
      .then(function (dimsAndMetrics) {
      callback(dimsAndMetrics.metrics);
+     });
+    };
+
+    this.getMetricsPlusDimensions = (query, callback) => {
+    return this.datasource.getDimensionsAndMetrics(this.target.druidDS)
+     .then(function (dimsAndMetrics) {
+     callback([].concat(dimsAndMetrics.metrics).concat(dimsAndMetrics.dimensions));
      });
     };
 
@@ -470,6 +479,14 @@ export class DruidQueryCtrl extends QueryCtrl {
       if (!target.currentAggregator.name) {
         return "Must provide an output name for count aggregator.";
       }
+      return null;
+    }
+
+    validateCardinalityAggregator(type, target) {
+      if (!target.currentAggregator.name) {
+        return "Must provide an output name for " + type + " aggregator.";
+      }
+    
       return null;
     }
 

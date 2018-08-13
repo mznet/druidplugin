@@ -11,6 +11,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
     listDataSources: any;
     getDimensionsAndMetrics: any;
     getMetrics: any;
+    getMetricsPlusDimensions: any;
     getDimensions: any;
     getFilterValues: any;
     queryTypes: any;
@@ -35,6 +36,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
     };
     aggregatorValidators: {
         "count": (target: any) => string;
+        "cardinality": any;
         "longSum": any;
         "doubleSum": any;
         "longMin": any;
@@ -106,6 +108,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
     validateRegexFilter(target: any): string;
     validateInFilter(target: any): string;
     validateCountAggregator(target: any): string;
+    validateCardinalityAggregator(type: any, target: any): string;
     validateSimpleAggregator(type: any, target: any): string;
     validateApproxHistogramFoldAggregator(target: any): string;
     validateThetaSketchAggregator(target: any): string;
