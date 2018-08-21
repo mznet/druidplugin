@@ -1,15 +1,19 @@
 <query-editor-row query-ctrl="ctrl" can-collapse="false">
   <div class="gf-form-inline">
-    <!--div class="gf-form max-width-20">
+
+    <gf-form-switch class="gf-form query-keyword" label="Advanced Options" label-class="" ng-init="ctrl.target.showDatasource = false" checked="ctrl.target.showDatasource" on-change="ctrl.toggleOneMinute(ctrl.target.showDatasource)">
+    </gf-form-switch>
+
+    <div class="gf-form max-width-20" ng-show="ctrl.target.showDatasource">
       <label class="gf-form-label query-keyword width-9">
         Datasource
         <label class="gf-form-label" bs-tooltip="ctrl.errors.druidDS" style="color: rgb(229, 189, 28)" ng-show="ctrl.errors.metric">
           <i class="fa fa-warning"></i>
         </label>
-      </label-->
-      <input type="hidden" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()">
+      </label>
+      <input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()">
       </input>
-    <!--/div-->
+    </div>
     <div class="gf-form">
       <label class="gf-form-label query-keyword width-4">
         Type
@@ -25,7 +29,7 @@
     <gf-form-switch class="gf-form" label="Custom Granularity" label-class="query-keyword" checked="ctrl.target.shouldOverrideGranularity" on-change="ctrl.targetBlur()">
     </gf-form-switch>
 
-    <div class="gf-form" ng-hide="!ctrl.target.shouldOverrideGranularity">
+    <div class="gf-form" ng-hide="!ctrl.target.shouldOverrideGranularity" >
         <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.customGranularity" spellcheck='false' bs-typeahead="ctrl.customGranularity" placeholder="granularity" data-min-length=0 ng-blur="ctrl.targetBlur()">
         </input>
     </div>

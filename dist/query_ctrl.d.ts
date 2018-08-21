@@ -74,6 +74,7 @@ export declare class DruidQueryCtrl extends QueryCtrl {
     /** @ngInject **/
     constructor($scope: any, $injector: any, $q: any);
     cachedAndCoalesced(ioFn: any, $scope: any, cacheName: any): any;
+    toggleOneMinute(current: any): void;
     targetBlur(): void;
     addFilter(): void;
     editFilter(index: any): void;
