@@ -101,7 +101,7 @@
       <label class="gf-form-label query-keyword width-5">
         Order
       </label>
-      <input type="text" required class="gf-form-input input-medium" ng-model="ctrl.target.orderBy" spellcheck='false' placeholder="col1,col2" bs-typeahead="ctrl.getDimensions" ng-blur="ctrl.targetBlur()" />
+      <input type="text" required class="gf-form-input input-medium" ng-model="ctrl.target.orderBy" spellcheck='false' placeholder="col1,col2" bs-typeahead="ctrl.getDimensions" data-min-length=0 ng-blur="ctrl.targetBlur()" />
       <label class="gf-form-label" bs-tooltip="ctrl.target.errors.getDimensions" style="color: rgb(229, 189, 28)" ng-show="ctrl.target.errors.getDimensions">
         <i class="fa fa-warning"></i>
       </label>
@@ -127,7 +127,7 @@
       </label>
     </div>
     <div class="gf-form" ng-switch-when="select" ng-show="ctrl.addDimensionsMode">
-      <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.currentSelect.dimension" spellcheck='false' placeholder="dimension" data-min-length=0 data-items=100 bs-typeahead="ctrl.getDimensions" />
+      <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.currentSelect.dimension" spellcheck='false' placeholder="dimension" data-items=100 bs-typeahead="ctrl.getDimensions" data-min-length=0 />
       <label class="gf-form-label" ng-show="ctrl.errors.selectDimensions">
         <a bs-tooltip="ctrl.errors.selectDimensions" style="color: rgb(229, 189, 28)">
           <i class="fa fa-warning"></i>
@@ -159,7 +159,7 @@
       </label>
     </div>
     <div class="gf-form" ng-show="ctrl.addMetricsMode">
-      <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.currentSelect.metric" spellcheck='false' placeholder="metric" data-min-length=0 data-items=100 bs-typeahead="ctrl.getMetrics" />
+      <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.currentSelect.metric" spellcheck='false' placeholder="metric" data-items=100 bs-typeahead="ctrl.getMetrics" data-min-length=2 data-delay=500 />
       <label class="gf-form-label" ng-show="ctrl.errors.selectMetrics">
         <a bs-tooltip="ctrl.errors.selectMetrics" style="color: rgb(229, 189, 28)">
           <i class="fa fa-warning"></i>
@@ -250,10 +250,10 @@
     </div>
     <div class="gf-form" ng-show="ctrl.addFilterMode" ng-switch on="ctrl.target.currentFilter.type">
       <input type="text" ng-switch-when="selector" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.dimension" placeholder="dimension" bs-typeahead="ctrl.getDimensions" data-min-length=0 ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="selector" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.value" ng-blur="ctrl.targetBlur()" bs-typeahead="ctrl.getFilterValues" placeholder="value">
+      <input type="text" ng-switch-when="selector" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.value"  placeholder="value" bs-typeahead="ctrl.getFilterValues" data-min-length=3 data-delay=500 ng-blur="ctrl.targetBlur()">
     </div>
     <div class="gf-form" ng-show="ctrl.addFilterMode" ng-switch on="ctrl.target.currentFilter.type">
-      <input type="text" ng-switch-when="javascript" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.dimension" placeholder="dimension" bs-typeahead="ctrl.getDimensions" data-min-length=0 ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="javascript" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.dimension" placeholder="dimension" bs-typeahead="ctrl.getDimensions" data-min-length=3 data-delay=500 ng-blur="ctrl.targetBlur()">
       <input type="text" ng-switch-when="javascript" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentFilter.function" placeholder="func" ng-blur="ctrl.targetBlur()" placeholder="value">
     </div>
     <div class="gf-form" ng-show="ctrl.addFilterMode" ng-switch on="ctrl.target.currentFilter.type">
@@ -423,7 +423,7 @@
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="cardinality" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="cardinality" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldNames" ng-blur="ctrl.targetBlur()" placeholder="metric name" bs-typeahead="ctrl.getMetricsPlusDimensions" data-min-length=0>
+      <input type="text" ng-switch-when="cardinality" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldNames" placeholder="metric name" bs-typeahead="ctrl.getMetricsPlusDimensions" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="cardinality" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
@@ -433,32 +433,32 @@
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="doubleSum" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="doubleSum" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="doubleSum" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="doubleSum" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="longMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="longMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="longMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="longMin" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="longMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="longMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="longMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="longMax" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="doubleMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="doubleMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="doubleMin" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="doubleMin" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="doubleMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="doubleMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="doubleMax" class="input-small gf-form-input width-10" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <gf-form-switch ng-switch-when="doubleMax" class="gf-form" label="Hidden" label-class="query-keyword" checked="ctrl.target.currentAggregator.hidden"></gf-form-switch>
     </div>
     <div class="gf-form" ng-show="ctrl.addAggregatorMode" ng-switch on="ctrl.target.currentAggregator.type">
       <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.name" placeholder="output name" ng-blur="ctrl.targetBlur()">
-      <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.fieldName" placeholder="metric name" bs-typeahead="ctrl.getMetrics" data-min-length=0 ng-blur="ctrl.targetBlur()">
       <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.resolution" placeholder="resolution" ng-blur="ctrl.targetBlur()">
       <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.numBuckets" placeholder="numBuckets" ng-blur="ctrl.targetBlur()">
       <input type="text" ng-switch-when="approxHistogramFold" class="input-small gf-form-input width-7" spellcheck='false' ng-model="ctrl.target.currentAggregator.lowerLimit" placeholder="lowerLimit" ng-blur="ctrl.targetBlur()">

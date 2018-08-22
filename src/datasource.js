@@ -126,6 +126,11 @@ define([
 
       // Called once per panel (graph)
       this.query = function (options) {
+        // At least two filters required
+        options.targets = _.filter(options.targets, function (target) {
+          return target.filters.length >= 2
+        });
+
         var dataSource = this;
         var from = dateToMoment(options.range.from, false);
         var to = dateToMoment(options.range.to, true);
@@ -158,7 +163,6 @@ define([
       };
 
       this._doQuery = function (from, to, granularity, target, scopedVars) {
-
         function splitCardinalityFields(aggregator) {
           if (aggregator.type === 'cardinality' && typeof aggregator.fieldNames === 'string') {
             aggregator.fieldNames = aggregator.fieldNames.split(',')
@@ -327,7 +331,7 @@ define([
           data: query
         };
         console.log("Make http request");
-        console.log(options);
+
         return backendSrv.datasourceRequest(options);
       };
 
