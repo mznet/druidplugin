@@ -184,7 +184,7 @@ export class DruidQueryCtrl extends QueryCtrl {
   }
 
   toggleOneMinute(current) {
-    if(current) {
+    if (current) {
       this.customGranularity.unshift('minute');
     }
     else {

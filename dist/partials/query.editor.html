@@ -1,7 +1,7 @@
 <query-editor-row query-ctrl="ctrl" can-collapse="false">
   <div class="gf-form-inline">
 
-    <gf-form-switch class="gf-form query-keyword" label="Advanced Options" label-class="" ng-init="ctrl.target.showDatasource = false" checked="ctrl.target.showDatasource" on-change="ctrl.toggleOneMinute(ctrl.target.showDatasource)">
+    <gf-form-switch class="gf-form query-keyword" label="Advanced Options" ng-init="ctrl.target.showDatasource = (crtl.target.druidDS == 'morpheus-minute' || ctrl.target.customGranularity == 'minute')" checked="ctrl.target.showDatasource" on-change="ctrl.toggleOneMinute(ctrl.target.showDatasource)">
     </gf-form-switch>
 
     <div class="gf-form max-width-20" ng-show="ctrl.target.showDatasource">
@@ -29,7 +29,7 @@
     <gf-form-switch class="gf-form" label="Custom Granularity" label-class="query-keyword" checked="ctrl.target.shouldOverrideGranularity" on-change="ctrl.targetBlur()">
     </gf-form-switch>
 
-    <div class="gf-form" ng-hide="!ctrl.target.shouldOverrideGranularity" >
+    <div class="gf-form" ng-hide="!ctrl.target.shouldOverrideGranularity">
         <input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.customGranularity" spellcheck='false' bs-typeahead="ctrl.customGranularity" placeholder="granularity" data-min-length=0 ng-blur="ctrl.targetBlur()">
         </input>
     </div>
