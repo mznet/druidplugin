@@ -11,7 +11,8 @@
           <i class="fa fa-warning"></i>
         </label>
       </label>
-      <input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' placeholder="druidDS" ng-blur="ctrl.targetBlur()">
+      <!--input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()"-->
       </input>
     </div>
     <div class="gf-form">

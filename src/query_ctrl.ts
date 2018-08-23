@@ -113,11 +113,10 @@ export class DruidQueryCtrl extends QueryCtrl {
     }
 
     // needs to be defined here as it is called from typeahead
-    // this.listDataSources = (query, callback) => {
-    //   this.datasource.getDataSources()
-    //     .then(callback);
-    // };
-    this.listDataSources = ['morpheus-ten-minute', 'morpheus-minute']
+    this.listDataSources = (query, callback) => {
+      this.datasource.getDataSources()
+        .then(callback);
+    };
 
     this.getDimensions = (query, callback) => {
       return this.datasource.getDimensionsAndMetrics(this.target.druidDS)
