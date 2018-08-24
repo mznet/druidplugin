@@ -94,11 +94,10 @@ System.register(['lodash', './sdk/sdk'], function(exports_1) {
                         this.target.limit = this.defaultLimit;
                     }
                     // needs to be defined here as it is called from typeahead
-                    // this.listDataSources = (query, callback) => {
-                    //   this.datasource.getDataSources()
-                    //     .then(callback);
-                    // };
-                    this.listDataSources = ['morpheus-ten-minute', 'morpheus-minute'];
+                    this.listDataSources = function (query, callback) {
+                        _this.datasource.getDataSources()
+                            .then(callback);
+                    };
                     this.getDimensions = function (query, callback) {
                         return _this.datasource.getDimensionsAndMetrics(_this.target.druidDS)
                             .then(function (dimsAndMetrics) {
@@ -158,12 +157,13 @@ System.register(['lodash', './sdk/sdk'], function(exports_1) {
                         return deferred.promise;
                     }
                 };
-                DruidQueryCtrl.prototype.toggleOneMinute = function (current) {
-                    if (current) {
+                DruidQueryCtrl.prototype.toggleMinute = function (showDataSource) {
+                    if (showDataSource && this.customGranularity[0] != 'minute') {
                         this.customGranularity.unshift('minute');
                     }
-                    else {
-                        this.customGranularity.shift();
+                    else if (!showDataSource) {
+                        if (this.customGranularity[0] == 'minute')
+                            this.customGranularity.shift();
                         this.target.customGranularity = this.customGranularity[0];
                     }
                 };

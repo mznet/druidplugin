@@ -113,11 +113,10 @@ export class DruidQueryCtrl extends QueryCtrl {
     }
 
     // needs to be defined here as it is called from typeahead
-    // this.listDataSources = (query, callback) => {
-    //   this.datasource.getDataSources()
-    //     .then(callback);
-    // };
-    this.listDataSources = ['morpheus-ten-minute', 'morpheus-minute']
+    this.listDataSources = (query, callback) => {
+      this.datasource.getDataSources()
+        .then(callback);
+    };
 
     this.getDimensions = (query, callback) => {
       return this.datasource.getDimensionsAndMetrics(this.target.druidDS)
@@ -183,12 +182,13 @@ export class DruidQueryCtrl extends QueryCtrl {
     }
   }
 
-  toggleOneMinute(current) {
-    if (current) {
+  toggleMinute(showDataSource) {
+    if (showDataSource && this.customGranularity[0] != 'minute') {
       this.customGranularity.unshift('minute');
     }
-    else {
-      this.customGranularity.shift();
+    else if (!showDataSource) {
+      if (this.customGranularity[0] == 'minute')
+        this.customGranularity.shift();
       this.target.customGranularity = this.customGranularity[0];
     }
   }

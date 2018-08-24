@@ -49,7 +49,7 @@ define([
       }
 
       var GRANULARITIES = [
-        ['minute', moment.duration(1, 'minute')],
+        //'minute', moment.duration(1, 'minute')],
         ['ten_minute', moment.duration(10, 'minute')],
         ['thirty_minute', moment.duration(30, 'minute')],
         ['hour', moment.duration(1, 'hour')],
@@ -606,9 +606,14 @@ define([
 
       function roundUpStartTime(from, granularity) {
         console.log(granularity);
-        var duration = _.find(GRANULARITIES, function (gEntry) {
-          return gEntry[0] === granularity;
-        })[1];
+        var duration = null;
+        if (granularity === 'minute')
+          duration = moment.duration(1, 'minute');
+        else {
+          duration = _.find(GRANULARITIES, function (gEntry) {
+            return gEntry[0] === granularity;
+          })[1];
+        }
         var rounded = null;
         if (granularity === 'day') {
           rounded = moment(+from).startOf('day');

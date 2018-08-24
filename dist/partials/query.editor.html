@@ -1,7 +1,7 @@
 <query-editor-row query-ctrl="ctrl" can-collapse="false">
-  <div class="gf-form-inline">
+  <div class="gf-form-inline" ng-init="ctrl.target.showDatasource = (crtl.target.druidDS == 'morpheus-minute' || ctrl.target.customGranularity == 'minute')">
 
-    <gf-form-switch class="gf-form query-keyword" label="Advanced Options" ng-init="ctrl.target.showDatasource = (crtl.target.druidDS == 'morpheus-minute' || ctrl.target.customGranularity == 'minute')" checked="ctrl.target.showDatasource" on-change="ctrl.toggleOneMinute(ctrl.target.showDatasource)">
+    <gf-form-switch class="gf-form" label="Advanced Options" label-class="query-keyword" checked="ctrl.target.showDatasource" on-change="ctrl.toggleMinute(ctrl.target.showDatasource)">
     </gf-form-switch>
 
     <div class="gf-form max-width-20" ng-show="ctrl.target.showDatasource">
@@ -11,7 +11,8 @@
           <i class="fa fa-warning"></i>
         </label>
       </label>
-      <input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()">
+      <input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' placeholder="druidDS" ng-blur="ctrl.targetBlur()">
+      <!--input type="text" ng-init="ctrl.target.druidDS = ctrl.target.druidDS || 'morpheus-ten-minute'" class="gf-form-input input-medium" ng-model="ctrl.target.druidDS" spellcheck='false' bs-typeahead="ctrl.listDataSources" placeholder="druidDS" data-min-length=0 ng-blur="ctrl.targetBlur()"-->
       </input>
     </div>
     <div class="gf-form">
