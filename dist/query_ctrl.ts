@@ -183,7 +183,6 @@ export class DruidQueryCtrl extends QueryCtrl {
   }
 
   toggleMinute(showDataSource) {
-    console.log(this.customGranularity[0]);
     if (showDataSource && this.customGranularity[0] != 'minute') {
       this.customGranularity.unshift('minute');
     }

@@ -158,7 +158,6 @@ System.register(['lodash', './sdk/sdk'], function(exports_1) {
                     }
                 };
                 DruidQueryCtrl.prototype.toggleMinute = function (showDataSource) {
-                    console.log(this.customGranularity[0]);
                     if (showDataSource && this.customGranularity[0] != 'minute') {
                         this.customGranularity.unshift('minute');
                     }
