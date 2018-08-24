@@ -1,7 +1,7 @@
 <query-editor-row query-ctrl="ctrl" can-collapse="false">
-  <div class="gf-form-inline">
+  <div class="gf-form-inline" ng-init="ctrl.target.showDatasource = (crtl.target.druidDS == 'morpheus-minute' || ctrl.target.customGranularity == 'minute')">
 
-    <gf-form-switch class="gf-form query-keyword" label="Advanced Options" ng-init="ctrl.target.showDatasource = (crtl.target.druidDS == 'morpheus-minute' || ctrl.target.customGranularity == 'minute')" checked="ctrl.target.showDatasource" on-change="ctrl.toggleOneMinute(ctrl.target.showDatasource)">
+    <gf-form-switch class="gf-form" label="Advanced Options" label-class="query-keyword" checked="ctrl.target.showDatasource" on-change="ctrl.toggleMinute(ctrl.target.showDatasource)">
     </gf-form-switch>
 
     <div class="gf-form max-width-20" ng-show="ctrl.target.showDatasource">

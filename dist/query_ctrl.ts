@@ -182,12 +182,14 @@ export class DruidQueryCtrl extends QueryCtrl {
     }
   }
 
-  toggleOneMinute(current) {
-    if (current) {
+  toggleMinute(showDataSource) {
+    console.log(this.customGranularity[0]);
+    if (showDataSource && this.customGranularity[0] != 'minute') {
       this.customGranularity.unshift('minute');
     }
-    else {
-      this.customGranularity.shift();
+    else if (!showDataSource) {
+      if (this.customGranularity[0] == 'minute')
+        this.customGranularity.shift();
       this.target.customGranularity = this.customGranularity[0];
     }
   }

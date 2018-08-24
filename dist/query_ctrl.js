@@ -157,12 +157,14 @@ System.register(['lodash', './sdk/sdk'], function(exports_1) {
                         return deferred.promise;
                     }
                 };
-                DruidQueryCtrl.prototype.toggleOneMinute = function (current) {
-                    if (current) {
+                DruidQueryCtrl.prototype.toggleMinute = function (showDataSource) {
+                    console.log(this.customGranularity[0]);
+                    if (showDataSource && this.customGranularity[0] != 'minute') {
                         this.customGranularity.unshift('minute');
                     }
-                    else {
-                        this.customGranularity.shift();
+                    else if (!showDataSource) {
+                        if (this.customGranularity[0] == 'minute')
+                            this.customGranularity.shift();
                         this.target.customGranularity = this.customGranularity[0];
                     }
                 };
